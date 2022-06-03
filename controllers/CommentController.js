@@ -14,7 +14,7 @@ async function storeComment(req, res) {
 
     let comment = await CommentModel.create({
         ...__.pick(req.body, ["body"]),
-        user_id: req.body.user.id,
+        user_id: req.header.user.id,
         post_id: post.id,
     })
     res.send(comment)

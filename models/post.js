@@ -12,15 +12,16 @@ const PostModel = sequelize.define('Post', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    user_id:{
-        type:DataTypes.INTEGER,
+    image: {type: DataTypes.STRING},
+    user_id: {
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 });
-PostModel.belongsTo(UserModel,{
-    foreignKey:"user_id"
+PostModel.belongsTo(UserModel, {
+    foreignKey: "user_id"
 })
-UserModel.hasMany(PostModel,{
-    foreignKey:"user_id"
+UserModel.hasMany(PostModel, {
+    foreignKey: "user_id"
 })
-module.exports={PostModel}
+module.exports = {PostModel}

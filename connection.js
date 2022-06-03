@@ -1,5 +1,5 @@
 const {Sequelize} = require("sequelize");
-const sequelize = new Sequelize("elated_northcutt", "root", "OPdgz19xV31vaNEfIk5CKdgN", {dialect: "mysql", host: 'vibrant-mcclintock-sjyneowoc-db'})
+const sequelize = new Sequelize("test", "root", "", {dialect: "mysql", host: 'localhost'})
 
 checkConnection();
 

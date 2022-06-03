@@ -9,7 +9,11 @@ async function storePost(req, res) {
     const {error} = storePostValidation(req.body)
     if (error) return abort(res, 422, error.message)
     await PostModel.sync()
-    let post = await PostModel.create({...__.pick(req.body, ["title", "body"]), user_id: req.body.user.id})
+    let post = await PostModel.create({
+        ...__.pick(req.body, ["title", "body"]),
+        user_id: req.header.user.id,
+        image: req.file ? req.file.filename : null
+    })
     res.send(post)
 }
 
