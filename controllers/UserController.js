@@ -9,7 +9,7 @@ async function storeUser(req, res) {
     const {error} = storeUserValidation(req.body)
 
     if (error) return abort(res, 422, error.message)
-
+    await UserModel.sync()
     let user = await UserModel.create({
         name: req.body.name,
         mobile: req.body.mobile,
@@ -23,7 +23,6 @@ async function login(req, res) {
 
     if (error) return abort(res, 422, error.message)
 
-    // let user = await UserModel.findOne({mobile: req.body.mobile})
     let user = await UserModel.findOne({where: {mobile: req.body.mobile}})
     if (user && await bcrypt.compare(req.body.password, user.password)) res.send(
         {token: generateAccessToken({id: user.id}), ..._.pick(user, ["name", "id", "mobile"])}
@@ -34,7 +33,7 @@ async function login(req, res) {
 }
 
 async function getUsers(req, res) {
-    let users = await UserModel.findAll({include:PostModel});
+    let users = await UserModel.findAll({include: PostModel});
     res.send({users})
 }
 
